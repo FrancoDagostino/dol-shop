@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import { PropsWithChildren, FC } from 'react';
-import { initialData } from '@/database/products'
+import { initialData } from '@/database/seed-data'
 import { IProduct } from '@/interface';
 import { ProductCard } from './ProductCard';
 
