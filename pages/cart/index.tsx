@@ -10,15 +10,17 @@ const CartPage = () => {
     const router = useRouter();
     const {cart} = useContext(CartContext);
 
+    console.log(cart.length);
     useEffect(() => {
-      
-        if(cart.length === 0) router.push('/cart/empty')
+          if(cart.length === 0) router.push('/cart/empty')
 
     }, [cart])
     
     if(cart.length === 0){
         return(<></>)
     }
+
+    console.log(cart.length);
   return (
     <ShopLayout title='Carrito - 3' pageDescription="Carrito de compras de la tienda">
         <Typography variant='h1' component='h1'>Carrito</Typography>
