@@ -26,22 +26,12 @@ const OrderPage: NextPage<Props> = ({order}) => {
     const router = useRouter();
     const {shippingAddress} = order;
 
-    const {tax,numberOfItems,subTotal,total} = order
-
-    const summary={
-        tax,
-        numberOfItems,
-        subTotal,
-        total,
-    }
-
     const onOrderCompleted = async(details: OrderResponseBody) => {
 
         if(details.status !== 'COMPLETED'){
             return alert('No hay pago en Paypal')
         }
-
-
+        
         setIsPaying(true);
 
         try {
@@ -86,7 +76,6 @@ const OrderPage: NextPage<Props> = ({order}) => {
             )
         }
         
-
         <Grid container>
             <Grid item xs={12} sm={7}>
                 <CartList products={order.orderItems}/>
@@ -109,8 +98,15 @@ const OrderPage: NextPage<Props> = ({order}) => {
                         
                         <Divider sx={{my:1}}/>
 
-                        <OrderSummary
-                            summary={summary}
+                        <OrderSummary 
+                            orderValues={
+                                {
+                                    numberOfItems: order.numberOfItems,
+                                    subTotal: order.subTotal,
+                                    total: order.total,
+                                    tax: order.tax,
+                                }
+                            }
                         />
 
                         <Box sx={{mt: 3}} display='flex' flexDirection='column'>
@@ -143,7 +139,7 @@ const OrderPage: NextPage<Props> = ({order}) => {
                                                     purchase_units: [
                                                         {
                                                             amount: {
-                                                                value: `${total}`,
+                                                                value: `${order.total}`,
                                                             },
                                                         },
                                                     ],
