@@ -1,7 +1,11 @@
+import { GetServerSideProps, NextPage } from 'next'
 import NextLink from 'next/link';
 import { ShopLayout } from '@/components/layouts'
 import { Typography, Grid,Chip,Link } from '@mui/material';
 import { DataGrid,GridColDef,GridRenderCellParams } from '@mui/x-data-grid';
+import { getSession } from 'next-auth/react';
+import { dbOrders } from '@/database';
+import { IOrder } from '@/interface';
 
 const columns: GridColDef[] = [
   {field:'id',headerName:'ID',width:100},
@@ -27,7 +31,7 @@ const columns: GridColDef[] = [
     
     renderCell:(params: GridRenderCellParams) => {
       return(
-        <NextLink href={`/orders/${params.row.id}`} passHref legacyBehavior>
+        <NextLink href={`/orders/${params.row.orderId}`} passHref legacyBehavior>
           <Link underline='always'>
               Ver orden
           </Link>
@@ -46,7 +50,24 @@ const rows = [
   {id:6,paid:true, fullname:'Juan Colo Makalister'},
 ]
 
-const HistoryPage = () => {
+interface Props {
+  orders: IOrder[]
+}
+
+const HistoryPage:NextPage<Props> = ({orders}) => {
+
+
+  const rows = orders.map((order,indice) => {
+
+    return{
+      id:indice + 1,
+      paid: order.isPaid,
+      fullname: `${order.shippingAddress.firstName} ${order.shippingAddress.lastName}`,
+      orderId: order._id
+    }
+  })
+
+
   return (
     <ShopLayout title={'Historial de ordenes'} pageDescription={'Historial de ordenes del cliente'}>
         <Typography variant='h1' component='h1'>Historial de ordenes</Typography>
@@ -67,6 +88,36 @@ const HistoryPage = () => {
         </Grid>
     </ShopLayout>
   )
+}
+
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
+  
+  const session: any = await getSession({req});
+
+  if(!session){
+    return{
+      redirect:{
+        destination:'auth/login?=/orders/history',
+        permanent:false
+      }
+    }
+  }
+
+
+  const orders = await dbOrders.getOrdersByUser(session.user._id);
+
+
+
+
+  return {
+    props: {
+      orders
+    }
+  }
 }
 
 export default HistoryPage
