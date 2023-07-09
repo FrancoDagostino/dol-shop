@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { IncomingForm, File } from 'formidable';
-import fs from 'fs';
 
 import {v2 as cloudinary} from 'cloudinary';
 
@@ -54,7 +53,10 @@ const parseFiles = async(req:NextApiRequest):Promise<string> =>{
                 return reject(err);
             }
 
-            const filePath = await saveFile(files.file[0] as File)
+            const fileList: File[] = files.file as File[];
+            const firstFile: File | undefined = fileList[0];
+
+            const filePath = await saveFile(firstFile as File)
             resolve(filePath);
         })
 
