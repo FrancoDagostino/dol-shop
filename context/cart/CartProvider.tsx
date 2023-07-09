@@ -4,7 +4,7 @@ import Cookie from 'js-cookie';
 import { CartContext,cartReducer } from './'
 import { ICartProduct, IOrder, IShippingAddress, ISize } from '@/interface'
 import Cookies from 'js-cookie';
-import { tesloApi } from '@/api';
+import { tesloApi } from '@/axiosApi';
 import axios from 'axios';
 
 

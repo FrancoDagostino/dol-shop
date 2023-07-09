@@ -9,6 +9,15 @@ export async function middleware(req: NextRequest) {
     const requestedPage = req.nextUrl.pathname;
     const validRoles = ['admin', 'super-user', 'SEO'];
     
+
+    if(req.nextUrl.pathname.startsWith('/login') && session){
+      const url = req.nextUrl.clone();
+      url.pathname='/'
+      return NextResponse.redirect(url);
+    }
+
+
+
  
     if( !session ){
         const url = req.nextUrl.clone();

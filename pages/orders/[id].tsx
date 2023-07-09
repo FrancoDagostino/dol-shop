@@ -13,7 +13,7 @@ import { Box,Card, CardContent, Chip, CircularProgress, Divider, Grid,Typography
 import {CreditCardOffOutlined, CreditScoreOutlined } from '@mui/icons-material';
 import { getOrderById } from '@/database/dbOrders';
 import { IOrder } from '@/interface';
-import { tesloApi } from '@/api';
+import { tesloApi } from '@/axiosApi';
 import { useRouter } from 'next/router';
 
 interface Props {

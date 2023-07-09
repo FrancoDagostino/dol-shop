@@ -6,7 +6,7 @@ import { PeopleOutline } from '@mui/icons-material'
 import { Grid, MenuItem, Select } from '@mui/material';
 import useSWR from 'swr';
 import { IUser } from '@/interface';
-import { tesloApi } from '@/api';
+import { tesloApi } from '@/axiosApi';
 
 
 const UsersPage = () => {
