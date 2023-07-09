@@ -8,6 +8,16 @@ export async function middleware(req: NextRequest) {
     const session: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const requestedPage = req.nextUrl.pathname;
     const validRoles = ['admin', 'super-user', 'SEO'];
+    
+
+    if(req.nextUrl.pathname.startsWith('/login') && session){
+      const url = req.nextUrl.clone();
+      url.pathname='/'
+      return NextResponse.redirect(url);
+    }
+
+
+
  
     if( !session ){
         const url = req.nextUrl.clone();
