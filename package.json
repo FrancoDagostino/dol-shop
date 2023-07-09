@@ -16,16 +16,20 @@
     "@mui/x-data-grid": "^6.8.0",
     "@paypal/paypal-js": "^6.0.0",
     "@paypal/react-paypal-js": "^8.1.0",
+    "@types/mercadopago": "^1.5.8",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.37.3",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
+    "formidable": "^3.5.0",
     "jose": "^4.14.4",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.0",
+    "mercadopago": "^1.5.16",
     "mongoose": "^7.3.0",
     "next": "13.4.5",
     "next-auth": "^4.22.1",
@@ -38,6 +42,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/formidable": "^3.4.0",
     "@types/js-cookie": "^3.0.3",
     "@types/jsonwebtoken": "^9.0.2"
   }

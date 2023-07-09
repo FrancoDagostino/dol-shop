@@ -5,7 +5,7 @@ import { FC, useContext } from "react"
 
 
 interface Props {
-    orderValues: {
+    orderValues?: {
         numberOfItems: number;
         subTotal: number;
         total: number;

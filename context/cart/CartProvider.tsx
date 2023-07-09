@@ -160,7 +160,6 @@ export const CartProvider: FC<PropsWithChildren> = ({children}) => {
             tax: state.tax,
             total: state.total,
             isPaid: false,
-            transactionId:''
         }
 
         try {
